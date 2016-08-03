@@ -1,0 +1,5 @@
+H = 0.9;
+f = -6:0.01:9;
+x = (1-2*H)*f;
+hold on,
+plot(f,x-14,'k--','LineWidth',1)

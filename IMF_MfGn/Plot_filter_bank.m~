@@ -1,0 +1,39 @@
+%% This code plots the Fourier spectra of IMFs obtained from decomposing mfGn using MEMD
+% The IMFs should 
+%
+%__________________________________________________________________________
+
+clear all
+close all
+clc
+% Specify the values of NDel and H to exract the corresponding saved IMFs
+% Available values are:
+% NDel = [0 0.2 0.5 0.8]
+% H    = [0.2 0.4 0.6 0.8]
+
+NDel = [0 0.2 0.5 0.8];
+H    = [0.2 0.4 0.6 0.8];
+
+for i=1:length(NDel)
+    for j=1:length(H)
+        load(['/idiap/user/akomaty/mfGn_results/IMFs_4D_MEMD_NDel_' num2str(int8(10*NDel(i))) '_H_' num2str(int8(10*H(j))) '.mat'])
+        all_spec = [];
+        for k = 1:5000
+            imf = squeeze(all_imfs(:,:,:,k));
+            [pspec, freq] = spec(imf);
+            all_spec = cat(4, all_spec, pspec);
+        end
+        mean_spec = mean(all_spec,4);
+        outputFolder = '/idiap/user/akomaty/mfGn_results/'; % save data in the current directory
+        outputFilename = sprintf('%s/SPEC_4D_MEMD_NDel_%d_H_%d.mat', outputFolder, int8(NDel(i)*10), int8(H(j)*10));
+        save(outputFilename, 'mean_spec', '-v7.3')
+    end
+end
+
+%% Select a specific saved spectrum and plot it with his normalized and shifted version
+
+i = 4; % pointer to the NDel vector
+j = 3; % pointer to the H vector
+
+load(['/idiap/user/akomaty/mfGn_results/SPEC_4D_MEMD_NDel_' num2str(int8(10*NDel(i))) '_H_' num2str(int8(10*H(j))) '.mat'])
+spec_plot(mean_spec,'none',H(j),freq)

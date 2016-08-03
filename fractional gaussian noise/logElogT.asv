@@ -1,0 +1,12 @@
+function [TE] = logElogT(imf);
+TE = [];
+for i=1:size(imf,1)
+    T = [];
+    E = [];
+    for j = 1:size(imf,2)
+        [indmin, indmax, indzer] = extr(imf(j,i,:));
+        T = [T (indmax(end)-indmax(1))/(length(indmax)-1)]; % average period estimation
+        E = [E sum(imfC(m,:).^2)/L]; % Energy density estimation
+    end
+    TE = [TE; T E];
+end

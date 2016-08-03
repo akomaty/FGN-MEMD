@@ -1,0 +1,48 @@
+close all
+clear all
+clc
+
+Fs = 2^9;
+t = 0:1/Fs:1-1/Fs;
+psdx_matrix = [];
+sum_psd_all_IMFs = zeros(7,Fs/2+1);
+total = 0;
+
+for H =  
+    for i = 1:1000
+    x = ffgn(1,H,1,size(t,2),0);
+    [freq,psdx] = psd_fft(x,Fs);
+    psdx_matrix = [psdx_matrix; psdx];
+
+    IMF = emd_basic(x);
+    psd_all_IMFs = [];
+
+        if size(IMF,1)>=7
+            total = total+1;
+            for j=1:7
+                [freq_IMF,psd_IMF] = psd_fft(IMF(j,:),Fs);
+                psd_all_IMFs = [psd_all_IMFs; psd_IMF];
+            end
+            sum_psd_all_IMFs = sum_psd_all_IMFs + psd_all_IMFs;
+        end
+    end
+    sum_psd_all_IMFs = sum_psd_all_IMFs/total;
+
+    figure,
+    for i=1:7
+        cstring='rgbcmyk'; % color string
+        plot(freq,sum_psd_all_IMFs(i,:),cstring(mod(i,7)+1)); grid on;
+        hold on,
+        legendInfo{i} = ['IMF_' num2str(i)];
+    end
+    title(['EMD -- H=',num2str(H)])
+    xlabel('frequency')
+    ylabel('FT(xcorr(noise))')
+    legend(legendInfo)
+
+    mean_psdx = mean(psdx_matrix);
+    figure,
+    plot(freq,mean_psdx); grid on;
+    title('Periodogram Using FFT');
+    xlabel('Frequency (Hz)'); ylabel('Power/Frequency (dB/Hz)');
+end
