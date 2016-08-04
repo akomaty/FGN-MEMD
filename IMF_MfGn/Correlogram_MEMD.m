@@ -16,11 +16,11 @@ for i=1:length(NDel)
             RHO = []; % stores the correlation of each imf index
             imf = all_imfs(:,:,:,k);
             for n = 1:size(imf,2) % n is the imf index
-            imf_n = squeeze(imf(:,n,:)); % we are choosing all channels corresponding to the n^{th} imf
-            imf_n = imf_n';
-            RHO = cat(3,corr(imf_n));
+                imf_n = squeeze(imf(:,n,:)); % we are choosing all channels corresponding to the n^{th} imf
+                imf_n = imf_n';
+                RHO = cat(3,RHO,corr(imf_n));
             end
-            RHO_all = cat(4,RHO); % stores every correlation matrix
+            RHO_all = cat(4,RHO_all,RHO); % stores every correlation matrix
             % The size of RHO_all will be p x p x n x m, in our special
             % case, it will be 8 x 8 x 8 x 5000
             % p is the number of channels
@@ -32,22 +32,3 @@ for i=1:length(NDel)
         save(outputFilename, 'RHO_all', '-v7.3') % save the spectrum
     end
 end
-
-
-%% Plot the Correlogram
-% 
-% figure,
-% colormap('summer');   % set colormap
-% imagesc(abs(mean(abs(RHO_all),3)));        % draw image and scale colormap to values range
-% colorbar;          % show color scale
-% hx = xlabel('IMF index');
-% hy = ylabel('IMF index');
-% set(hx, 'FontSize', 20) 
-% set(hy, 'FontSize', 20) 
-% set(gca,'fontsize',20)
-
-
-% cgo2 = HeatMap(cc);
-% set(cgo2,'Colormap',redbluecmap);
-% cgo3 = HeatMap(mio);
-% set(cgo3,'Colormap',redbluecmap);
