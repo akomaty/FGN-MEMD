@@ -30,17 +30,3 @@ for i=1:length(NDel)
         save(outputFilename, 'ZC_all', 'slope_all', '-v7.3') % save the ZC matrix
     end
 end
-
-%%
-% AAA = mean(ZC_all,3);
-% 
-% figure(101)
-% for i=0:5
-%     cstring='rgbcmyk'; % color string
-%     plot(1:8,log2(AAA(:,i+1))-2,cstring(mod(i,7)+1),'LineWidth',2)  % plot with a different color each time
-%     hold on,
-%     legendInfo{i+1} = ['\alpha=1.' num2str(i)];
-% end
-% xlabel('IMF index')
-% ylabel('log(zro-crossing)')
-% legend(legendInfo)
