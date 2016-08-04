@@ -32,3 +32,23 @@ for i=1:length(NDel)
         save(outputFilename, 'RHO_all', '-v7.3') % save the spectrum
     end
 end
+
+
+% To better understand the outcome of this function, we'll give some
+% examples:
+% RHO is of size p x p x n, where p is the nb of channels and n is th nb of
+% imfs. What do represent RHO is the following:
+%  RHO is the correlation matrix between I_i_1, I_i_2, ...,I_i_p
+%  where i \in {1, 2, ..., n} and I stands for IMF
+%  The result of this correlation for the 4^{th} IMF will be as follows:
+%            I_4_1   I_4_2   I_4_3   I_4_4   I_4_5 ...ect
+% I_4_1        1       v       v       v       v
+% I_4_2        v       1       v       v       v
+% I_4_3        v       v       1       v       v
+% I_4_4        v       v       v       1       v
+% I_4_5        v       v       v       v       1
+%   .          .       .       .       .       .
+%   .          .       .       .       .       .
+%   .          .       .       .       .       .
+%  etc        etc     etc     etc     etc     etc
+%  where 
