@@ -24,6 +24,7 @@ for i=1:length(NDel)
             set(hx, 'FontSize', 14) 
             set(hy, 'FontSize', 14) 
             set(gca,'fontsize',14)
+            caxis([0 1])
             title(['IMF_' num2str(n)])
         end
         savefig(['/idiap/user/akomaty/mfGn_results/Results/Correlogram_MEMD_NDel_' num2str(int8(10*NDel(i))) '_H_' num2str(int8(10*H(j))) '.fig'])

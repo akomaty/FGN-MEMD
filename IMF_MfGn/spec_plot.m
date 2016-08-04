@@ -3,7 +3,7 @@
 %          type : type of the process 'LFSM' or 'FARIMA'
 %          v    : vector containing the process parameters
 
-function spec_plot(pspec,type,h,freq)
+function spec_plot(pspec,h,freq)
 N = 2*size(pspec,2);
 % freq = 0:N/2-1; % Find the corresponding frequency in Hz
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,19 +35,6 @@ set(gca,'fontsize',14)
 % set(gcf,'DefaultLineLineWidth',1.5);
 % xlabel('Frequency');
 % axis tight; grid off
-
-    if strcmp(type, 'LFSM')
-    title(['n=', num2str(v(1)), ' LFSM paths__\alpha=', num2str(v(2)), '__H=',...
-        num2str(v(3)), '__m=', num2str(v(4)), '__M=', num2str(v(5)), '__C=',...
-        num2str(v(6)), '__N=', num2str(v(7))])
-
-    elseif strcmp(type, 'FARIMA')
-        title(['n=', num2str(v(1)), ' FARIMA paths__\alpha=', num2str(v(2)), '__\beta=',...
-        num2str(v(3)), '__d=', num2str(v(4)), '__\phi=', num2str(v(5)), '__\theta=',...
-        num2str(v(6)), '__N=', num2str(v(7)), '__M=', num2str(v(8))])
-    end
-    
-
 
 % normalized filter bank
 freqk = freq;
