@@ -8,7 +8,9 @@ NDel = [0 0.2 0.5 0.8];
 for i=1:length(NDel)
     FigName = ['/idiap/user/akomaty/mfGn_results/Results/lnE_m_MEMD_NDel_' num2str(int8(10*NDel(i))) '.fig'];
     openfig(FigName);
-    savefig(gcf,FigName,'compact')
+    title('')
+    xlabel('m')
+%     savefig(gcf,FigName,'compact')
     epsName = ['/idiap/user/akomaty/mfGn_results/Results/lnE_m_MEMD_NDel_' num2str(int8(10*NDel(i))) '.eps'];
     saveas(gcf,epsName,'epsc')
 end
