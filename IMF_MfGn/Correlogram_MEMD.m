@@ -33,7 +33,6 @@ for i=1:length(NDel)
     end
 end
 
-
 % To better understand the outcome of this function, we'll give some
 % examples:
 % RHO is of size p x p x n, where p is the nb of channels and n is th nb of
@@ -51,4 +50,3 @@ end
 %   .          .       .       .       .       .
 %   .          .       .       .       .       .
 %  etc        etc     etc     etc     etc     etc
-%  where 
